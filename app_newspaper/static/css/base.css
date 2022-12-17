@@ -1,0 +1,17 @@
+body{
+    color: rgb(0, 0, 0);
+    margin: 50%;
+    list-style: none;
+}
+
+#body{
+    margin-top: 15px;
+    border-top: solid 1px rgb(0, 132, 255);
+    padding-top: 50px;
+   
+}
+
+.body{
+    text-align: justify;
+    margin-bottom: 30px;
+}

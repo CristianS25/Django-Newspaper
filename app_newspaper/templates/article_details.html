@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% load crispy_forms_tags %}
+
+    {% block content %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card border-secondary">
+                    <div class="card-header">
+                        <h3>{{ object.title }}</h3>
+                        <p>by {{ object.author }} | {{ object.date }} </p>
+                    </div>
+                    <div class="card-body">
+                        <p> {{ object.body }} </p>
+                    </div>
+                    <div class="card-footer">
+                        <h4>Comments</h4>
+                        {% for comment in article.comment_set.all %}
+                            <p>{{ comment.author }} &middot; {{ comment }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-info">
+                    <div class="card-header"><h4>Add Comment</h4></div>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-primary ml-2" type="submit">Save</button>
+                    </form>
+                </div>
+
+            </div> 
+        </div>
+        
+        <div class="text-center">
+            <ul class="nav list-inline">
+                <li class="list-inline-item"><a class="btn btn-outline-success" href="{% url 'article_edit' article.pk %}"> Edit </a></li>
+                <li class="list-inline-item"><a class="btn btn-outline-danger" href="{% url 'article_delete' article.pk %}"> Delete </a></li>
+                <li class="list-inline-item"><a class="btn btn-outline-primary" href="{% url 'articles_site' %}">Back To All Articles </a></li>
+            </ul>
+        </div>
+    {% endblock content %}
+</body>
+</html> 
